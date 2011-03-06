@@ -1,0 +1,3 @@
+# Rails ticket 8994
+
+`ruby example.rb` works, but `rake generate` fails. This seems to be because rake [includes FileUtils](https://github.com/jimweirich/rake/blob/rake-0.8.7/lib/rake.rb#L1194) in the top level module, which causes the method\_missing not to fire when only method\_missing is used in [Rails::ActionMethods](https://github.com/rails/rails/blob/master/railties/lib/rails/generators/rails/app/app_generator.rb). It works when the methods are explicitly defined, as they are in [Rails::ActionMethods (Rails 3.0.5)](https://github.com/rails/rails/blob/v3.0.5/railties/lib/rails/generators/rails/app/app_generator.rb).
